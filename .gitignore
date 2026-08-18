@@ -1,0 +1,22 @@
+# 빌드 산출물 — 항상 build.py 로 재생성한다. 저장소에 넣으면 커밋마다 수 MB 가 쌓인다.
+dist/
+dist_game/
+
+# 라운드별 백업·잔여물 (마운트에서 삭제가 안 돼 mv 로 모아 두는 곳)
+_to_delete/
+*동기화잔여/
+_구파일/
+
+# 파이썬
+__pycache__/
+*.pyc
+
+# 도구가 남기는 것
+*.bak
+*_prenorm.bak
+_syntax_check.js
+build/i18n_todo.json
+
+# 검증 스크린샷 (필요하면 개별적으로 add)
+shot_*.png
+검증_*.png

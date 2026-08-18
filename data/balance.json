@@ -1,0 +1,7 @@
+{
+ "GOLD_MULT": 2.2,
+ "DROP_MULT": 2,
+ "XP_MULT": 3,
+ "TEST_GOLD": 1000000,
+ "MOB_XP_MULT": 2
+}

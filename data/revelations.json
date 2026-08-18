@@ -1,0 +1,30 @@
+{
+ "REV_README": [
+  "계시(문신) — 런 한정 빌드 선택. 층을 클리어하면 신탁이 3택을 내리고, 고른 계시가 문신으로 몸에 새겨진다.",
+  "사망하면 RUN 과 함께 통째로 소멸한다(RUN 은 저장되지 않는다).",
+  "필드: id 식별자 / n 이름 / line 계열(빛·검신·무신) / desc 설명 / c 계열색 / k 효과키 / v 기준 수치",
+  "심화: 같은 계시를 다시 고르면 2단이 되고 v 가 1.5배로 갱신된다. 최대 2단(REV_MAX) — 무한 스택 금지.",
+  "효과 배선은 src/24c_revelation.js 의 revVal(id) 를 기존 계산식 옆에 가산하는 방식이다."
+ ],
+ "REVELATIONS": [
+  {"id":"rv_mend",  "n":"스스로 아무는 살", "line":"빛",   "desc":"HP 재생 +60%",                  "c":"#ffd76e", "k":"hpregen",  "v":60},
+  {"id":"rv_ward",  "n":"빛의 장막",       "line":"빛",   "desc":"층 진입 보호막 +20",             "c":"#ffd76e", "k":"shield",   "v":20},
+  {"id":"rv_feast", "n":"승리의 성찬",     "line":"빛",   "desc":"처치 시 HP 3 회복",              "c":"#ffd76e", "k":"killheal", "v":3},
+  {"id":"rv_mercy", "n":"자비의 유예",     "line":"빛",   "desc":"치명상 1회 무효 후 HP 25% (런 1회)", "c":"#ffd76e", "k":"mercy",    "v":25},
+
+  {"id":"rv_edge",  "n":"벼려진 칼끝",     "line":"검신", "desc":"공격력 +4",                      "c":"#ff9a6a", "k":"atk",      "v":4},
+  {"id":"rv_haste", "n":"바람의 손목",     "line":"검신", "desc":"공격 속도 +12%",                 "c":"#ff9a6a", "k":"aspd",     "v":12},
+  {"id":"rv_exec",  "n":"목을 베는 눈",    "line":"검신", "desc":"HP 30% 이하 적 피해 +40%",       "c":"#ff9a6a", "k":"exec",     "v":40},
+  {"id":"rv_chain", "n":"이어지는 참격",   "line":"검신", "desc":"처치 후 2초간 공격력 +6",        "c":"#ff9a6a", "k":"chain",    "v":6},
+
+  {"id":"rv_step",  "n":"그림자 걸음",     "line":"무신", "desc":"이동 속도 +10%",                 "c":"#9fe2ff", "k":"mspd",     "v":10},
+  {"id":"rv_dodge", "n":"스치는 죽음",     "line":"무신", "desc":"회피 쿨타임 -30%",               "c":"#9fe2ff", "k":"dashcd",   "v":30},
+  {"id":"rv_burst", "n":"회피 반격",       "line":"무신", "desc":"회피 직후 1.5초간 공격력 +8",    "c":"#9fe2ff", "k":"burst",    "v":8},
+  {"id":"rv_thorn", "n":"가시 문신",       "line":"무신", "desc":"피격 시 공격자에게 피해 6 반사", "c":"#9fe2ff", "k":"thorn",    "v":6},
+
+  {"id":"rv_lamp",  "n":"꺼지지 않는 등불", "line":"빛",   "desc":"처치 시 HP 8 회복",              "c":"#ffd76e", "k":"killheal", "v":8,  "req":3},
+  {"id":"rv_behead","n":"참수의 자세",     "line":"검신", "desc":"HP 30% 이하 적 피해 +90%",       "c":"#ff9a6a", "k":"exec",     "v":90, "req":6},
+  {"id":"rv_gale",  "n":"바람을 앞지르는 발","line":"무신","desc":"이동 속도 +22%",                 "c":"#9fe2ff", "k":"mspd",     "v":22, "req":9},
+  {"id":"rv_named", "n":"이름을 되찾은 자", "line":"계시", "desc":"공격력 +12",                     "c":"#c9a6ff", "k":"atk",      "v":12, "req":12}
+ ]
+}

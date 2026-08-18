@@ -1,0 +1,41 @@
+{
+ "_readme": [
+  "캐릭터별 발 접지 폭(px). tools/normalize_sheets.py --footprint 로 생성.",
+  "19_render.js 가 그림자 크기를 이 값에서 산출한다(옛 고정 상수 6.5*sz 대체).",
+  "에셋을 교체하면 이 파일도 다시 뽑아야 한다."
+ ],
+ "FOOTPRINT": {
+  "knight": 19,
+  "bear": 41,
+  "dk": 28,
+  "ghoul": 17,
+  "gob": 34,
+  "npc_bd_boss": 24,
+  "npc_bd_thug": 14,
+  "npc_ct_adept": 19,
+  "npc_ct_zealot": 21,
+  "npc_garad": 22,
+  "npc_gd_arch": 22,
+  "npc_gd_spear": 23,
+  "npc_harwin": 23,
+  "npc_mc_blade": 25,
+  "npc_mc_ranger": 17,
+  "npc_mc_witch": 20,
+  "npc_merian": 20,
+  "npc_muller": 18,
+  "npc_sela": 21,
+  "npc_vestra": 16,
+  "orc": 18,
+  "orcarch": 20,
+  "orcchief": 29,
+  "orcwar": 22,
+  "pc_elf": 14,
+  "pc_wiz": 19,
+  "skel": 20,
+  "spartoi": 27,
+  "vamp": 21,
+  "wight": 30,
+  "wolf": 14,
+  "zombie": 20
+ }
+}

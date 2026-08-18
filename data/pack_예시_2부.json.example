@@ -1,0 +1,26 @@
+{
+ "_pack": { "id": "pack_test2", "n": "테스트 2부", "owned": true },
+ "merge": {
+  "ZONES": [
+   { "name":"시험 마경 6층", "w":20,"h":16,"theme":"dun","seed":61,"obst":0.12,"song":"dungeon",
+     "gates":[{"x":2,"y":2,"to":5,"tx":3,"ty":6,"label":"봉인의 문"},
+              {"x":17,"y":13,"to":7,"tx":2,"ty":2,"label":"7층"}],
+     "npcs":[],
+     "spawns":[["wight",2,10,8,3],["wight@red",2,6,6,2],["wight@pale",1,14,10,2]],
+     "rooms":true, "elites":1 },
+   { "name":"시험 마경 7층", "w":18,"h":14,"theme":"dun2","seed":62,"obst":0.12,"song":"dungeon",
+     "gates":[{"x":2,"y":2,"to":6,"tx":16,"ty":12,"label":"6층"}],
+     "npcs":[], "spawns":[["dk@black",1,9,7,1]], "rooms":true }
+  ],
+  "ACTS": [
+   { "id":"act2test", "n":"2부 · 시험 마경", "pack":"pack_test2",
+     "entry":{"z":6,"x":3,"y":6},
+     "floors":{"6":6,"7":7}, "fam":{"6":"undead","7":"undead"},
+     "boss":7, "clearFlag":"clear2", "req":"clear1" }
+  ],
+  "VARIANT": {
+   "wight@pale": { "line":"black", "n":"창백한 원귀",
+                   "tint":{"hset":190,"ds":1.1,"dv":0.9,"tone":{"h":190,"s":0.4}} }
+  }
+ }
+}

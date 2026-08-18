@@ -1,0 +1,69 @@
+{
+  "_readme": [
+    "R19b 몹 변종(색 변경) — 대표 지시: '몬스터는 재사용하면서 색상만 변경, 일반 늑대 / 붉은 늑대 / 검은 늑대'.",
+    "스프라이트를 새로 뽑지 않는다. 이미 빌드에 들어있는 assets/mob 시트를 런타임에 HSV 로 다시 칠한다.",
+    "그래서 이 파일에 한 줄 적을 때마다 몹 1종이 늘고, 용량 증가는 0 이다(에셋 0원).",
+    "",
+    "VARLINE = 변종 계보. 색·배수를 여기 한 곳에서 잡는다(28종을 따로 튜닝하지 않는다).",
+    "  tint.hset : 채색 픽셀의 색조를 이 절대 각도(0~360)로 '고정'한다.",
+    "              ★ dh(상대 회전)로 하면 원본 색조가 종마다 달라(늑대 회색/마족 초록) 결과가 튄다.",
+    "                핏빛 계보는 어떤 종이든 같은 핏빛이어야 하므로 절대 지정이 맞다.",
+    "  tint.tone : 무채색(S < sMin) 픽셀 착색. 늑대 회색 털·백골병 뼈처럼 채도가 없는 몹은",
+    "              색조를 돌려도 아무 일이 없다 — 이 값이 있어야 회색 털이 붉게 물든다.",
+    "  tint.dv   : 명도 배수. 투명하지 않은 모든 픽셀에 적용한다(실루엣을 통째로 어둡게).",
+    "VARIANT = 실제 몹. 키는 반드시 '원종@접미' 형태다 — 도감(metaMarkDex)이 @ 앞만 잘라",
+    "          원종으로 합쳐 세므로, 변종이 늘어도 도감 종수는 늘지 않는다.",
+    "  n/line 만 적으면 나머지는 원종에서 그대로 물려받는다(hp/드롭/출혈/사거리...).",
+    "  mul/add 를 적으면 그 항목만 계보 기본값을 덮어쓴다.",
+    "",
+    "확장팩(DLC)도 이 표에 append 로 붙일 수 있다 — merge.VARIANT 에 넣으면 된다."
+  ],
+
+  "VARLINE": {
+    "red": {
+      "n": "핏빛",
+      "tint": { "hset": 352, "ds": 1.25, "dv": 1.0, "tone": { "h": 352, "s": 0.58 } },
+      "mul": { "hp": 0.85, "dmg": 1.35, "xp": 1.4, "gold": 1.4, "sp": 1.15 },
+      "add": { "lv": 2, "ac": 0 }
+    },
+    "black": {
+      "n": "흑암",
+      "tint": { "hset": 252, "ds": 1.15, "dv": 0.76, "tone": { "h": 252, "s": 0.44 } },
+      "mul": { "hp": 1.7, "dmg": 1.15, "xp": 1.8, "gold": 1.8, "sp": 0.95 },
+      "add": { "lv": 4, "ac": 2 }
+    }
+  },
+
+  "VARIANT": {
+    "wolf@red":     { "line": "red",   "n": "붉은 늑대" },
+    "wolf@black":   { "line": "black", "n": "검은 늑대" },
+    "gob@red":      { "line": "red",   "n": "핏빛 고블린" },
+    "gob@black":    { "line": "black", "n": "흑암 고블린" },
+    "bear@red":     { "line": "red",   "n": "붉은 숲곰" },
+    "bear@black":   { "line": "black", "n": "검은 숲곰" },
+
+    "orc@red":      { "line": "red",   "n": "핏빛 병졸" },
+    "orc@black":    { "line": "black", "n": "흑철 병졸" },
+    "orcarch@red":  { "line": "red",   "n": "핏빛 궁병" },
+    "orcarch@black":{ "line": "black", "n": "흑철 궁병" },
+    "orcwar@red":   { "line": "red",   "n": "핏빛 전사" },
+    "orcwar@black": { "line": "black", "n": "흑철 전사" },
+    "orcchief@red":   { "line": "red",   "n": "핏빛 장수 무르갓", "mul": { "hp": 1.0, "dmg": 1.25, "xp": 1.3, "gold": 1.3 } },
+    "orcchief@black": { "line": "black", "n": "흑철 장수 무르갓", "mul": { "hp": 1.45, "dmg": 1.12, "xp": 1.6, "gold": 1.6 } },
+
+    "skel@red":     { "line": "red",   "n": "핏빛 백골병" },
+    "skel@black":   { "line": "black", "n": "흑암 백골병" },
+    "zombie@red":   { "line": "red",   "n": "핏빛 시병" },
+    "zombie@black": { "line": "black", "n": "흑암 시병" },
+    "ghoul@red":    { "line": "red",   "n": "핏빛 식시귀" },
+    "ghoul@black":  { "line": "black", "n": "흑암 식시귀" },
+    "spartoi@red":  { "line": "red",   "n": "핏빛 뼈창병" },
+    "spartoi@black":{ "line": "black", "n": "흑암 뼈창병" },
+    "wight@red":    { "line": "red",   "n": "핏빛 원귀" },
+    "wight@black":  { "line": "black", "n": "흑암 원귀" },
+    "vamp@red":     { "line": "red",   "n": "진혈의 사도" },
+    "vamp@black":   { "line": "black", "n": "흑혈의 사도" },
+    "dk@red":       { "line": "red",   "n": "피에 젖은 기사",  "mul": { "hp": 1.0, "dmg": 1.2, "xp": 1.25, "gold": 1.25 } },
+    "dk@black":     { "line": "black", "n": "심연의 기사",     "mul": { "hp": 1.4, "dmg": 1.1, "xp": 1.5, "gold": 1.5 } }
+  }
+}

@@ -1,0 +1,212 @@
+[
+ {
+  "name": "knight",
+  "target_h": 48,
+  "cell_w": 55,
+  "cell_h": 60,
+  "n_files": 8
+ },
+ {
+  "name": "bear",
+  "target_h": 48,
+  "cell_w": 69,
+  "cell_h": 60,
+  "n_files": 8
+ },
+ {
+  "name": "dk",
+  "target_h": 62,
+  "cell_w": 35,
+  "cell_h": 74,
+  "n_files": 8
+ },
+ {
+  "name": "ghoul",
+  "target_h": 41,
+  "cell_w": 61,
+  "cell_h": 53,
+  "n_files": 8
+ },
+ {
+  "name": "gob",
+  "target_h": 37,
+  "cell_w": 42,
+  "cell_h": 49,
+  "n_files": 8
+ },
+ {
+  "name": "npc_bd_boss",
+  "target_h": 52,
+  "cell_w": 39,
+  "cell_h": 64,
+  "n_files": 8
+ },
+ {
+  "name": "npc_bd_thug",
+  "target_h": 47,
+  "cell_w": 30,
+  "cell_h": 59,
+  "n_files": 8
+ },
+ {
+  "name": "npc_ct_adept",
+  "target_h": 48,
+  "cell_w": 28,
+  "cell_h": 60,
+  "n_files": 8
+ },
+ {
+  "name": "npc_ct_zealot",
+  "target_h": 48,
+  "cell_w": 30,
+  "cell_h": 60,
+  "n_files": 8
+ },
+ {
+  "name": "npc_garad",
+  "target_h": 44,
+  "cell_w": 29,
+  "cell_h": 56,
+  "n_files": 6
+ },
+ {
+  "name": "npc_gd_arch",
+  "target_h": 52,
+  "cell_w": 30,
+  "cell_h": 64,
+  "n_files": 8
+ },
+ {
+  "name": "npc_gd_spear",
+  "target_h": 60,
+  "cell_w": 105,
+  "cell_h": 72,
+  "n_files": 8
+ },
+ {
+  "name": "npc_harwin",
+  "target_h": 48,
+  "cell_w": 39,
+  "cell_h": 60,
+  "n_files": 6
+ },
+ {
+  "name": "npc_mc_blade",
+  "target_h": 52,
+  "cell_w": 32,
+  "cell_h": 64,
+  "n_files": 8
+ },
+ {
+  "name": "npc_mc_ranger",
+  "target_h": 53,
+  "cell_w": 32,
+  "cell_h": 65,
+  "n_files": 8
+ },
+ {
+  "name": "npc_mc_witch",
+  "target_h": 52,
+  "cell_w": 55,
+  "cell_h": 64,
+  "n_files": 8
+ },
+ {
+  "name": "npc_merian",
+  "target_h": 47,
+  "cell_w": 25,
+  "cell_h": 59,
+  "n_files": 6
+ },
+ {
+  "name": "npc_muller",
+  "target_h": 46,
+  "cell_w": 30,
+  "cell_h": 58,
+  "n_files": 6
+ },
+ {
+  "name": "npc_sela",
+  "target_h": 45,
+  "cell_w": 26,
+  "cell_h": 57,
+  "n_files": 6
+ },
+ {
+  "name": "npc_vestra",
+  "target_h": 41,
+  "cell_w": 25,
+  "cell_h": 53,
+  "n_files": 6
+ },
+ {
+  "name": "orc",
+  "target_h": 48,
+  "cell_w": 66,
+  "cell_h": 60,
+  "n_files": 8
+ },
+ {
+  "name": "orcarch",
+  "target_h": 48,
+  "cell_w": 56,
+  "cell_h": 60,
+  "n_files": 8
+ },
+ {
+  "name": "orcchief",
+  "target_h": 58,
+  "cell_w": 33,
+  "cell_h": 70,
+  "n_files": 8
+ },
+ {
+  "name": "orcwar",
+  "target_h": 50,
+  "cell_w": 88,
+  "cell_h": 62,
+  "n_files": 8
+ },
+ {
+  "name": "skel",
+  "target_h": 48,
+  "cell_w": 29,
+  "cell_h": 60,
+  "n_files": 8
+ },
+ {
+  "name": "spartoi",
+  "target_h": 52,
+  "cell_w": 66,
+  "cell_h": 64,
+  "n_files": 8
+ },
+ {
+  "name": "vamp",
+  "target_h": 52,
+  "cell_w": 30,
+  "cell_h": 64,
+  "n_files": 8
+ },
+ {
+  "name": "wight",
+  "target_h": 52,
+  "cell_w": 46,
+  "cell_h": 68,
+  "n_files": 8
+ },
+ {
+  "name": "wolf",
+  "target_h": 38,
+  "cell_w": 49,
+  "cell_h": 50,
+  "n_files": 6
+ },
+ {
+  "name": "zombie",
+  "target_h": 50,
+  "cell_w": 29,
+  "cell_h": 62,
+  "n_files": 8
+ }
+]

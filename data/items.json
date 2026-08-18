@@ -1,0 +1,752 @@
+{
+ "ITEMS": {
+  "dagger": {
+   "n": "단검",
+   "t": "weapon",
+   "wt": "sword",
+   "d1": 3,
+   "d2": 5,
+   "pr": 60,
+   "hue": 210
+  },
+  "gladius": {
+   "n": "그라디우스",
+   "t": "weapon",
+   "wt": "sword",
+   "d1": 6,
+   "d2": 10,
+   "pr": 520,
+   "hue": 210
+  },
+  "longsw": {
+   "n": "장검",
+   "t": "weapon",
+   "wt": "sword",
+   "d1": 8,
+   "d2": 14,
+   "pr": 1900,
+   "hue": 214
+  },
+  "silversw": {
+   "n": "은장검",
+   "t": "weapon",
+   "wt": "sword",
+   "d1": 11,
+   "d2": 17,
+   "pr": 7000,
+   "cls": "ke",
+   "hue": 200,
+   "sat": 8
+  },
+  "katana": {
+   "n": "일본도",
+   "t": "weapon",
+   "wt": "sword",
+   "d1": 13,
+   "d2": 20,
+   "pr": 17000,
+   "cls": "ke",
+   "hue": 206
+  },
+  "twohand": {
+   "n": "양손검",
+   "t": "weapon",
+   "wt": "sword",
+   "d1": 20,
+   "d2": 31,
+   "pr": 34000,
+   "cls": "k",
+   "hue": 212,
+   "h2": 1
+  },
+  "greataxe": {
+   "n": "대형 도끼",
+   "t": "weapon",
+   "wt": "axe",
+   "d1": 20,
+   "d2": 34,
+   "pr": 48000,
+   "cls": "k",
+   "hue": 24,
+   "sat": 18,
+   "h2": 1
+  },
+  "dkaxe": {
+   "n": "이름 없는 대부(大斧)",
+   "t": "weapon",
+   "wt": "axe",
+   "d1": 29,
+   "d2": 46,
+   "pr": 120000,
+   "cls": "k",
+   "rare": 1,
+   "hue": 352,
+   "sat": 24,
+   "h2": 1
+  },
+  "sbow": {
+   "n": "작은 활",
+   "t": "weapon",
+   "wt": "bow",
+   "d1": 3,
+   "d2": 5,
+   "pr": 180,
+   "hue": 30,
+   "sat": 36
+  },
+  "bow": {
+   "n": "활",
+   "t": "weapon",
+   "wt": "bow",
+   "d1": 5,
+   "d2": 9,
+   "pr": 900,
+   "hue": 30,
+   "sat": 36
+  },
+  "huntbow": {
+   "n": "사냥꾼 활",
+   "t": "weapon",
+   "wt": "bow",
+   "d1": 8,
+   "d2": 12,
+   "pr": 3400,
+   "cls": "e",
+   "hue": 26,
+   "sat": 40
+  },
+  "longbow": {
+   "n": "장궁",
+   "t": "weapon",
+   "wt": "bow",
+   "d1": 11,
+   "d2": 16,
+   "pr": 13000,
+   "cls": "e",
+   "hue": 34,
+   "sat": 42
+  },
+  "elfbow": {
+   "n": "요정족 활",
+   "t": "weapon",
+   "wt": "bow",
+   "d1": 15,
+   "d2": 22,
+   "pr": 42000,
+   "cls": "e",
+   "hue": 120,
+   "sat": 38
+  },
+  "mwand": {
+   "n": "마력의 지팡이",
+   "t": "weapon",
+   "wt": "staff",
+   "d1": 2,
+   "d2": 4,
+   "mag": 2,
+   "pr": 420,
+   "cls": "m",
+   "hue": 196
+  },
+  "manastaff": {
+   "n": "마나의 지팡이",
+   "t": "weapon",
+   "wt": "staff",
+   "d1": 3,
+   "d2": 6,
+   "mag": 4,
+   "mpr": 0.6,
+   "pr": 2400,
+   "cls": "m",
+   "hue": 210
+  },
+  "wizstaff": {
+   "n": "마법사의 지팡이",
+   "t": "weapon",
+   "wt": "staff",
+   "d1": 5,
+   "d2": 8,
+   "mag": 7,
+   "pr": 9800,
+   "cls": "m",
+   "hue": 276
+  },
+  "powstaff": {
+   "n": "힘의 지팡이",
+   "t": "weapon",
+   "wt": "staff",
+   "d1": 9,
+   "d2": 13,
+   "mag": 12,
+   "pr": 34000,
+   "cls": "m",
+   "hue": 16
+  },
+  "arrow": {
+   "n": "화살",
+   "t": "ammo",
+   "dmg": 2,
+   "pr": 120,
+   "cls": "e",
+   "hue": 30
+  },
+  "silverar": {
+   "n": "은화살",
+   "t": "ammo",
+   "dmg": 5,
+   "pr": 2200,
+   "cls": "e",
+   "hue": 200
+  },
+  "mithrilar": {
+   "n": "미스릴 화살",
+   "t": "ammo",
+   "dmg": 9,
+   "pr": 12000,
+   "cls": "e",
+   "hue": 200
+  },
+  "ljacket": {
+   "n": "가죽 재킷",
+   "t": "armor",
+   "ac": 1,
+   "pr": 120,
+   "hue": 28,
+   "sat": 34
+  },
+  "leather": {
+   "n": "가죽 갑옷",
+   "t": "armor",
+   "ac": 2,
+   "pr": 420,
+   "hue": 26,
+   "sat": 36
+  },
+  "ringmail": {
+   "n": "고리 갑옷",
+   "t": "armor",
+   "ac": 3,
+   "pr": 1600,
+   "hue": 212,
+   "sat": 12
+  },
+  "mrobe": {
+   "n": "마법사 옷",
+   "t": "armor",
+   "ac": 3,
+   "mag": 3,
+   "pr": 1300,
+   "cls": "m",
+   "hue": 272,
+   "sat": 34
+  },
+  "scale": {
+   "n": "비늘 갑옷",
+   "t": "armor",
+   "ac": 4,
+   "pr": 4200,
+   "cls": "ke",
+   "hue": 150,
+   "sat": 20
+  },
+  "chain": {
+   "n": "사슬 갑옷",
+   "t": "armor",
+   "ac": 5,
+   "pr": 9200,
+   "cls": "ke",
+   "hue": 214,
+   "sat": 10
+  },
+  "eplate": {
+   "n": "요정족 판금 갑옷",
+   "t": "armor",
+   "ac": 6,
+   "pr": 23000,
+   "cls": "ke",
+   "hue": 132,
+   "sat": 26
+  },
+  "plate": {
+   "n": "판금 갑옷",
+   "t": "armor",
+   "ac": 7,
+   "pr": 31000,
+   "cls": "k",
+   "hue": 216,
+   "sat": 12
+  },
+  "crystal": {
+   "n": "수정 갑옷",
+   "t": "armor",
+   "ac": 8,
+   "pr": 78000,
+   "cls": "ke",
+   "hue": 190,
+   "sat": 34
+  },
+  "lcap": {
+   "n": "가죽 모자",
+   "t": "helm",
+   "ac": 1,
+   "pr": 150,
+   "hue": 28,
+   "sat": 34
+  },
+  "helmet": {
+   "n": "투구",
+   "t": "helm",
+   "ac": 2,
+   "pr": 950,
+   "hue": 214,
+   "sat": 12
+  },
+  "mhat": {
+   "n": "마법사 모자",
+   "t": "helm",
+   "ac": 2,
+   "mag": 2,
+   "pr": 1200,
+   "cls": "m",
+   "hue": 272,
+   "sat": 34
+  },
+  "ehelm": {
+   "n": "요정족 가죽 투구",
+   "t": "helm",
+   "ac": 2,
+   "pr": 1500,
+   "cls": "e",
+   "hue": 130,
+   "sat": 28
+  },
+  "svisor": {
+   "n": "강철 면갑",
+   "t": "helm",
+   "ac": 3,
+   "pr": 5200,
+   "cls": "k",
+   "hue": 210,
+   "sat": 8
+  },
+  "wshield": {
+   "n": "나무 방패",
+   "t": "shield",
+   "ac": 1,
+   "pr": 200,
+   "hue": 30,
+   "sat": 38
+  },
+  "sshield": {
+   "n": "작은 방패",
+   "t": "shield",
+   "ac": 1,
+   "pr": 720,
+   "hue": 34,
+   "sat": 30
+  },
+  "bshield": {
+   "n": "큰 방패",
+   "t": "shield",
+   "ac": 2,
+   "pr": 2700,
+   "cls": "ke",
+   "hue": 30,
+   "sat": 34
+  },
+  "mbook": {
+   "n": "마력서",
+   "t": "shield",
+   "ac": 2,
+   "mag": 4,
+   "pr": 3400,
+   "cls": "m",
+   "hue": 266,
+   "sat": 36
+  },
+  "eshield": {
+   "n": "요정족 방패",
+   "t": "shield",
+   "ac": 2,
+   "pr": 3100,
+   "cls": "e",
+   "hue": 128,
+   "sat": 32
+  },
+  "steelsh": {
+   "n": "강철 방패",
+   "t": "shield",
+   "ac": 3,
+   "pr": 8400,
+   "cls": "k",
+   "hue": 210,
+   "sat": 8
+  },
+  "ocloak": {
+   "n": "오크족 망토",
+   "t": "cloak",
+   "ac": 1,
+   "pr": 320,
+   "hue": 36,
+   "sat": 26
+  },
+  "mcloak": {
+   "n": "마법 망토",
+   "t": "cloak",
+   "ac": 1,
+   "mag": 2,
+   "pr": 1900,
+   "cls": "m",
+   "hue": 276,
+   "sat": 36
+  },
+  "ecloak": {
+   "n": "요정족 망토",
+   "t": "cloak",
+   "ac": 1,
+   "pr": 1900,
+   "cls": "e",
+   "hue": 126,
+   "sat": 32
+  },
+  "pcloak": {
+   "n": "보호 망토",
+   "t": "cloak",
+   "ac": 3,
+   "pr": 15000,
+   "hue": 352,
+   "sat": 38
+  },
+  "sandal": {
+   "n": "가죽 샌달",
+   "t": "boots",
+   "ac": 1,
+   "pr": 110,
+   "hue": 28,
+   "sat": 34
+  },
+  "sboots": {
+   "n": "짧은 부츠",
+   "t": "boots",
+   "ac": 1,
+   "pr": 540,
+   "hue": 26,
+   "sat": 36
+  },
+  "boots": {
+   "n": "부츠",
+   "t": "boots",
+   "ac": 2,
+   "pr": 2100,
+   "hue": 24,
+   "sat": 36
+  },
+  "steelbt": {
+   "n": "강철 부츠",
+   "t": "boots",
+   "ac": 3,
+   "pr": 7200,
+   "cls": "k",
+   "hue": 210,
+   "sat": 8
+  },
+  "glove": {
+   "n": "장갑",
+   "t": "glove",
+   "ac": 1,
+   "pr": 210,
+   "hue": 28,
+   "sat": 34
+  },
+  "thimble": {
+   "n": "활 골무",
+   "t": "glove",
+   "ac": 1,
+   "dex": 1,
+   "pr": 850,
+   "cls": "ke",
+   "hue": 34,
+   "sat": 30
+  },
+  "steelgl": {
+   "n": "강철 장갑",
+   "t": "glove",
+   "ac": 2,
+   "pr": 3100,
+   "cls": "k",
+   "hue": 210,
+   "sat": 8
+  },
+  "hpot": {
+   "n": "체력 회복제",
+   "t": "potion",
+   "heal": 30,
+   "pr": 50,
+   "pc": "#e04848",
+   "hue": 0,
+   "shape": "round"
+  },
+  "hpot2": {
+   "n": "진한 체력 회복제",
+   "t": "potion",
+   "heal": 95,
+   "pr": 190,
+   "pc": "#ff6a5a",
+   "hue": 0,
+   "shape": "tall"
+  },
+  "mpot": {
+   "n": "마나 회복제",
+   "t": "potion",
+   "mana": 28,
+   "pr": 95,
+   "pc": "#5a8ae0",
+   "hue": 220,
+   "shape": "angular"
+  },
+  "mpot2": {
+   "n": "진한 마나 회복제",
+   "t": "potion",
+   "mana": 70,
+   "pr": 320,
+   "pc": "#7ab0ff",
+   "hue": 220,
+   "shape": "wide"
+  },
+  "brave": {
+   "n": "용기의 물약",
+   "t": "potion",
+   "brave": 1,
+   "pr": 300,
+   "pc": "#e0c040",
+   "hue": 44,
+   "shape": "flask"
+  },
+  "torch": {
+   "n": "기름 횃불",
+   "t": "potion",
+   "lit": 44,
+   "litdur": 600,
+   "pr": 90,
+   "hue": 28,
+   "sat": 78
+  },
+  "lantern": {
+   "n": "광부의 등불",
+   "t": "potion",
+   "lit": 76,
+   "litdur": 1200,
+   "pr": 420,
+   "hue": 46,
+   "sat": 62,
+   "rare": 1
+  },
+  "antidote": {
+   "n": "해독초 즙",
+   "t": "potion",
+   "cure": "poison",
+   "pr": 120,
+   "hue": 100,
+   "sat": 60,
+   "shape": "flask"
+  },
+  "bandage": {
+   "n": "마전(麻煎) 붕대",
+   "t": "potion",
+   "cure": "bleed",
+   "pr": 100,
+   "hue": 8,
+   "sat": 30
+  },
+  "crate": {
+   "n": "세금 궤",
+   "t": "quest",
+   "pr": 0
+  },
+  "ret": {
+   "n": "귀환 각인",
+   "t": "scroll",
+   "ret": 1,
+   "pr": 140
+  },
+  "tscroll": {
+   "n": "위장 술식서",
+   "t": "scroll",
+   "tf": 1,
+   "pr": 800
+  },
+  "wscroll": {
+   "n": "무기 각인서",
+   "t": "scroll",
+   "ench": "weapon",
+   "pr": 4200
+  },
+  "ascroll": {
+   "n": "갑옷 각인서",
+   "t": "scroll",
+   "ench": "acc",
+   "pr": 2600
+  },
+  "bwscroll": {
+   "n": "봉인된 무기 각인서",
+   "t": "scroll",
+   "ench": "weapon",
+   "bless": 1,
+   "pr": 22000,
+   "rare": 1
+  },
+  "dtscroll": {
+   "n": "흑기사 위장 술식서",
+   "t": "scroll",
+   "tfdk": 1,
+   "pr": 60000,
+   "rare": 1
+  },
+  "wolfhide": {
+   "n": "서리늑대 가죽",
+   "t": "quest",
+   "pr": 15
+  },
+  "orctusk": {
+   "n": "마족 엄니",
+   "t": "quest",
+   "pr": 25
+  },
+  "boneshard": {
+   "n": "백골 조각",
+   "t": "quest",
+   "pr": 20
+  },
+  "meat": {
+   "n": "들짐승 고기",
+   "t": "quest",
+   "pr": 12
+  },
+  "stew": {
+   "n": "여관의 스튜",
+   "t": "potion",
+   "heal": 45,
+   "pr": 90,
+   "pc": "#c8862e",
+   "hue": 30,
+   "shape": "round"
+  }
+ },
+ "SLOTN": {
+  "weapon": "무기",
+  "armor": "갑옷",
+  "helm": "투구",
+  "shield": "방패",
+  "cloak": "망토",
+  "boots": "부츠",
+  "glove": "장갑",
+  "ammo": "화살"
+ },
+ "SLOTS": [
+  "weapon",
+  "armor",
+  "helm",
+  "shield",
+  "cloak",
+  "boots",
+  "glove",
+  "ammo"
+ ],
+ "SHOPCAT": [
+  [
+   "소모품",
+   [
+    "hpot",
+    "hpot2",
+    "mpot",
+    "mpot2",
+    "brave",
+    "ret",
+    "tscroll",
+    "torch",
+    "lantern",
+    "antidote",
+    "bandage"
+   ]
+  ],
+  [
+   "주문서",
+   [
+    "wscroll",
+    "ascroll"
+   ]
+  ],
+  [
+   "무기",
+   [
+    "dagger",
+    "gladius",
+    "longsw",
+    "silversw",
+    "katana",
+    "twohand",
+    "greataxe"
+   ]
+  ],
+  [
+   "활/화살",
+   [
+    "sbow",
+    "bow",
+    "huntbow",
+    "longbow",
+    "arrow",
+    "silverar",
+    "mithrilar"
+   ]
+  ],
+  [
+   "지팡이",
+   [
+    "mwand",
+    "manastaff",
+    "wizstaff",
+    "powstaff"
+   ]
+  ],
+  [
+   "갑옷",
+   [
+    "ljacket",
+    "leather",
+    "ringmail",
+    "mrobe",
+    "scale",
+    "chain",
+    "eplate",
+    "plate"
+   ]
+  ],
+  [
+   "장신구",
+   [
+    "lcap",
+    "helmet",
+    "mhat",
+    "ehelm",
+    "svisor",
+    "wshield",
+    "sshield",
+    "bshield",
+    "mbook",
+    "eshield",
+    "steelsh",
+    "ocloak",
+    "mcloak",
+    "ecloak",
+    "sandal",
+    "sboots",
+    "boots",
+    "steelbt",
+    "glove",
+    "thimble",
+    "steelgl"
+   ]
+  ]
+ ]
+}
