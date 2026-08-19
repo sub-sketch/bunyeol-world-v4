@@ -306,7 +306,10 @@ function metaSave(){
 function metaLoad(){
   var raw = null;
   try{ raw = localStorage.getItem(META_KEY); }catch(e){}
-  if(!raw) return false;
+  /* R35 수리 — 저장본이 없다 = 신규 계정. 이관할 옛 진행이 없으므로 이관 완료로 표시한다.
+     예전엔 그냥 반환해서 migr32 가 0 인 채로 첫 저장이 되었고, 그 다음 로드에서
+     metaMigrate32() 의 (META.runs>0) 조건이 충족되어 신규 플레이어가 400P 를 받았다. */
+  if(!raw){ META.migr32 = 1; return false; }
   try{
     var o = JSON.parse(raw);
     if(!o || o.v !== 4) return false;      /* v3 이하 거부 */

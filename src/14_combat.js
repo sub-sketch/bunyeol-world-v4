@@ -325,7 +325,11 @@ function gainXp(x){
    if(gPrev[1]!==gNow[1]){shake(3,.4);
      log("문신의 색이 짙어집니다 — 이능 등급 <b style='color:"+gNow[2]+"'>"+gNow[1]+"</b> 도달","#ffdf00");}
    log("<b>레벨이 올라갔습니다! (Lv."+P.lv+")</b> HP +"+hpUp+(mpUp?" MP +"+mpUp:""),"#ff9f2a");
-   mySkills().forEach(function(sk){if(sk.lv===P.lv)log("새로운 능력 <b>["+sk.n+"]</b>을 습득했습니다!","#9fe2ff");});
+   /* R35 수리 — 예전엔 여기서 "새로운 능력 [X]을 습득했습니다!" 를 찍었다.
+      R32 에서 레벨 해금을 폐지한 뒤(skKnown = skLv>0, 노드에서 구매) 이 로그는 거짓이 되었다.
+      레벨을 올려도 스킬은 열리지 않는데 열렸다고 말해서, 플레이어가 퀵바를 보고 혼란스러워했다.
+      classes.json 의 sk.lv 값은 남아 있으나 스킬 습득에는 관여하지 않는다.
+      ★ 아래 줄의 변신(TFS) 해금 로그는 13_transform.js 가 P.lv>=t.lv 로 실제 게이트하므로 참이다. 건드리지 말 것. */
    Object.keys(TFS).forEach(function(k){if(TFS[k].lv===P.lv&&!TFS[k].scroll)
      log("변신 ["+TFS[k].n+"]이 해금되었습니다.","#c07aff");});
  }
