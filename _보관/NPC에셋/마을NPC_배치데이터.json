@@ -1,0 +1,87 @@
+{
+ "_note": "R36에서 걸어다니는 성읍을 없애며 보관. 좌표·kind·act 정의. 되살리려면 zones.json ZONES[0].npcs 로 복원.",
+ "town_npcs": [
+  {
+   "id": "muller",
+   "n": "뮐러",
+   "title": "성읍 잡화상",
+   "x": 3,
+   "y": 7,
+   "kind": "shop",
+   "act": "npc_shop"
+  },
+  {
+   "id": "harwin",
+   "n": "하르윈",
+   "title": "변경 여관 주인",
+   "x": 3,
+   "y": 9,
+   "kind": "inn",
+   "act": "npc_inn"
+  },
+  {
+   "id": "merian",
+   "n": "메리안",
+   "title": "명부신 사제",
+   "x": 10,
+   "y": 2,
+   "kind": "priest",
+   "act": "npc_priest"
+  },
+  {
+   "id": "vestra",
+   "n": "베스트라",
+   "title": "차원문 관리인",
+   "x": 15,
+   "y": 6,
+   "kind": "portal",
+   "act": "npc_portal"
+  },
+  {
+   "id": "sela",
+   "n": "셀라",
+   "title": "축복의 사제",
+   "x": 10,
+   "y": 13,
+   "kind": "bless",
+   "act": "npc_bless"
+  },
+  {
+   "id": "garad",
+   "n": "가라드",
+   "title": "차원문지기",
+   "x": 15,
+   "y": 10,
+   "kind": "portal",
+   "act": "npc_portal"
+  }
+ ],
+ "town_zone": {
+  "name": "노스가드 변경 성읍",
+  "w": 20,
+  "h": 16,
+  "theme": "town",
+  "seed": 11,
+  "obst": 0.055,
+  "song": "town",
+  "gates": [
+   {
+    "x": 18,
+    "y": 8,
+    "to": 1,
+    "tx": 2,
+    "ty": 8,
+    "label": "서리들녘 · 1층"
+   }
+  ],
+  "deco": [
+   {
+    "k": "cross",
+    "x": 8,
+    "y": 6
+   }
+  ],
+  "spawns": [],
+  "cross": true
+ }
+}

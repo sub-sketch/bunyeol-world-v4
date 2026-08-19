@@ -187,10 +187,8 @@ function renderOpt(){
  var el=document.getElementById("optbody");if(!el)return;
  var h="";
  var eff=Math.round(curScale*100);
- h+=optRow("모바일 모드","스마트폰 기준으로 배율·시야·터치 패드를 한 번에 맞춥니다",
-   optBtn("켜기",!!OPT.mobile,"optSet('mobile',true)")+optBtn("끄기",!OPT.mobile,"optSet('mobile',false)")+
-   '<span style="color:#6b6046;font-size:10px;margin-left:4px">'+
-   (OPT.mobile?"큰 도트 · 자동 배율 · 조작 패드 표시":"PC 기준")+'</span>');
+ /* R36 — 「모바일 모드」 항목 제거(PC 전용). OPT.mobile 값과 optSet 처리는 남겨 둔다 —
+    기존 저장본에 true 로 남아 있어도 10_mobilepad.js 스텁이 아무 일도 하지 않는다. */
  h+=optRow("화면 배율","창 전체 크기",
    SCALES.map(function(s){return optBtn(s.n,OPT.scale===s.v,"optSet('scale',"+s.v+")");}).join("")+
    '<span style="color:#6b6046;font-size:10px;margin-left:4px">현재 '+eff+'% 적용</span>');

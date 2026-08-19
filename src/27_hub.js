@@ -202,11 +202,8 @@ function hubEnter(k){
   try{ f.fn(); }catch(e){ if(typeof log === "function") log("아직 열 수 없습니다.", "#f88"); }
 }
 /* 이행용 — 걸어다니는 성읍으로 (퀘스트 NPC가 아직 거기 있다) */
-function hubWalk(){
-  HUB_SKIP = true;                 /* 이번 도착에는 허브를 띄우지 않는다 */
-  hubHide();
-  if(typeof travel === "function") travel(0, 10, 9);
-}
+/* R36 — 걸어다니는 성읍 진입 폐지. 호출부가 남아 있어도 안전하도록 껍데기만 남긴다. */
+function hubWalk(){ }
 
 function hubRender(){
   var h = hubDef(HUB.id);
@@ -284,9 +281,10 @@ function hubRender(){
          + '<img src="' + hubIcoUrl(f.ic, "#e8d36e") + '" width="24" height="24" alt="">'
          + '<span>' + (inf.n || f.d) + '</span></div>';
     });
-    r += '<div class="hbtn walk" onclick="hubWalk()" title="걸어다니는 성읍(이행용)">'
-       + '<img src="' + hubIcoUrl("walk", "#9fe2ff") + '" width="24" height="24" alt="">'
-       + '<span>마을 거닐기</span></div>';
+    /* R36 — 「마을 거닐기」 제거. 대표 지시 2026-08-19 "마을 거닐기 없애줘".
+       이 버튼은 원래 '이행용'이었다 — 퀘스트를 NPC에게 걸어가서 받던 시절의 잔재.
+       지금은 길드 화면(openP("quest"))이 수락·보고를 모두 처리하므로(16_quest.js qAcceptFrom/qTurnInFrom)
+       걸어다니는 성읍에 갈 이유가 없다. 존 0 은 기술적 기준점으로 남지만 화면에는 늘 거점이 덮인다. */
     rail.innerHTML = r;
   }
 }
@@ -346,10 +344,9 @@ function hubDepart(){
    거점(존 0)에 도착하면 허브 화면을 띄운다 = "마을 거점을 배경 화면으로".
    ★ 「마을 거닐기」로 일부러 들어온 경우에는 띄우지 않는다 — 안 그러면 눌러도 허브가 다시 덮어
      걸어다니는 마을에 들어갈 수 없다. hubWalk 가 세운 표식을 한 번만 소모한다. */
-var HUB_SKIP = false;
+/* R36 — HUB_SKIP 제거. 「마을 거닐기」가 없어졌으므로 거점을 건너뛸 경로가 없다. */
 function hubOnTravel(zone){
   if(zone !== 0 || !HUBS.length) return;
-  if(HUB_SKIP){ HUB_SKIP = false; return; }
   hubShow();
 }
 

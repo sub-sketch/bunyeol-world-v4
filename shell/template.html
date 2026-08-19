@@ -646,6 +646,9 @@ body.mobile .bigbtn{padding:13px 18px;font-size:15px}
 body.mobile #topbar{font-size:12px}
 body.mobile .key{min-width:30px;min-height:26px}
 body.mobile #quick{gap:5px}
+/* R36 — 모바일 미지원(PC 전용). 대표 지시 2026-08-19 "모바일 버전 없애줘".
+   되살리려면 이 두 줄과 src/10_mobilepad.js 스텁만 되돌리면 된다. */
+#mpad,#mpadtoggle,#rotatehint{display:none !important}
 </style>
 </head>
 <body>
@@ -849,7 +852,10 @@ body.mobile #quick{gap:5px}
 <div class="panel" id="meta"><h3>영구 성장 <span class="x" onclick="closeP('meta')">✕</span></h3>
 <div style="color:#a89c86;font-size:11px;margin-bottom:6px">업적포인트는 죽어도 사라지지 않습니다.</div>
 <div id="metalist"></div>
-<button class="ib sell" style="margin-top:10px" onclick="if(confirm('메타 진행도를 전부 지웁니다. 계속할까요?'))metaReset()">진행도 초기화</button>
+<!-- R36 — 「진행도 초기화」(metaReset: 포인트·업적·도감까지 전부 삭제)를 뺐다.
+     대표 지시: "초기화라고 하기보단 재분배가 맞을 듯". 포인트는 그대로 두고 노드만 푼다.
+     metaReset() 함수 자체는 25_meta.js 에 남아 있다(콘솔에서 호출 가능). -->
+<button class="ib" style="margin-top:10px" onclick="if(confirm('찍은 노드를 모두 풀고 포인트를 전액 돌려받습니다. 계속할까요?'))metaRespec()">노드 재분배</button>
 </div>
 <div class="overlay" id="markov" style="z-index:92;background:rgba(4,3,8,.94)">
  <div style="margin:96px auto 0;max-width:460px;background:linear-gradient(#1a1626,#0d0b14);

@@ -98,10 +98,11 @@ function refreshSkillPanel(){
     <select> 로 만든다 — 습득한 스킬이 계열마다 다르고 늘어나므로 목록형이 가장 안 헷갈린다. */
  if(!P.aslot)P.aslot=[null,null,null,null];
  var t4=document.createElement("div");t4.style.cssText="color:#e8d36e;font-size:11px;margin:12px 0 2px";
- t4.textContent="■ 자동 스킬 — 등록한 것만, 위에서 아래 순서로";L.appendChild(t4);
+ t4.textContent="■ 스킬 칸 (Q·W·E·R) — 여기 넣은 네 개만 쓸 수 있습니다";L.appendChild(t4);
  var note4=document.createElement("div");
  note4.style.cssText="color:#6b6046;font-size:10px;line-height:14px;margin-bottom:4px";
- note4.innerHTML="쓸 스킬만 골라 넣으십시오. <b style='color:#9fe2ff'>Q → W → E → R</b> 순서로 먼저 되는 것을 씁니다."
+ note4.innerHTML="<b style='color:#ffd27a'>실제로 쓸 수 있는 스킬은 이 네 칸이 전부입니다.</b> 배운 스킬이 많아도 여기 넣은 것만 나갑니다."
+  +" 자동 사냥은 <b style='color:#9fe2ff'>Q → W → E → R</b> 순서로 먼저 되는 것을 씁니다."
   +" 칸마다 <b style='color:#7fc7ff'>자동</b>/<b>수동</b>을 고를 수 있습니다 — 수동 칸은 키로만 나가고 자동에서는 건너뜁니다."
   +" 네 칸을 다 비우면 예전처럼 <b>습득한 스킬 중 마나가 큰 것</b>부터 씁니다.";
  L.appendChild(note4);
@@ -143,7 +144,7 @@ function refreshSkillPanel(){
    L.appendChild(w0);
  }
  var cb=document.createElement("button");cb.className="ib";cb.style.marginTop="6px";
- cb.textContent="자동 스킬 칸 비우기";cb.onclick=aslotClear;L.appendChild(cb);
+ cb.textContent="스킬 칸 전부 비우기";cb.onclick=aslotClear;L.appendChild(cb);
  var note=document.createElement("div");
  note.style.cssText="color:#6b6046;font-size:10px;margin-top:4px";
  note.innerHTML="설정 체력 이하로 떨어지면 자동으로 물약을 마십니다. 위급할 때는 진한 회복제를 우선 사용합니다.";
@@ -158,13 +159,23 @@ function refreshQuick(){
    html+='<div class="qbtn'+(c?"":" dis")+'" onclick="usePotKey(\''+pk+'\')" title="'+ITEMS[pk].n+'">['+
      bindLabel(P.bind.pt[i])+'] '+(POTSHORT[pk]||ITEMS[pk].n)+' <b>'+c+'</b></div>';
  }
- mySkills().forEach(function(sk,i2){
-   if(!skKnown(sk.id))return;                     /* 안 산 스킬은 퀵바에 없다 */
-   var cd=(P.cd[sk.id]||0)-T;
-   var cls="qbtn"+((cd>0||P.mp<sk.mp)?" dis":"");
-   html+='<div class="'+cls+'" onclick="castSkill('+i2+')" title="'+sk.desc+' (MP '+sk.mp+')">['+
-     bindLabel(P.bind.sk[i2])+'] '+sk.n+(cd>0?" "+cd.toFixed(1):"")+'</div>';
- });
+ /* R36 — 스킬은 등록한 Q·W·E·R 네 칸만 그린다.
+    예전엔 습득한 스킬을 전부 그려서, 5개째부터 P.bind.sk(4칸)에 대응하는 키가 없어
+    라벨이 「—」로 뜨고 키보드로는 쓸 수 없는 버튼이 계속 아래로 붙었다.
+    등록은 [V] 스킬 화면의 Q·W·E·R 칸에서 한다(aslotSet). */
+ if(!P.aslot||P.aslot.length!==4)P.aslot=[null,null,null,null];
+ (function(){
+   var list=mySkills(),i,j,sk,id,cd,cls;
+   for(i=0;i<4;i++){
+     id=P.aslot[i]; if(!id)continue;
+     sk=null; for(j=0;j<list.length;j++)if(list[j].id===id){sk=list[j];break;}
+     if(!sk||!skKnown(id))continue;
+     cd=(P.cd[id]||0)-T;
+     cls="qbtn"+((cd>0||P.mp<sk.mp)?" dis":"");
+     html+='<div class="'+cls+'" onclick="castSlot('+i+')" title="'+sk.desc+' (MP '+sk.mp+')">['+
+       bindLabel(P.bind.sk[i])+'] '+sk.n+(cd>0?" "+cd.toFixed(1):"")+'</div>';
+   }
+ })();
  /* 회피 — 해금했을 때만 슬롯이 생긴다. 쿨타임 바 포함. */
  if(typeof dashUnlocked==="function"&&dashUnlocked()){
    var dcd=Math.max(0,(P.dashCd||0)-T),dp=clamp(1-dcd/DASH.cd,0,1);

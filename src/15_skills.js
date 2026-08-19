@@ -224,6 +224,26 @@ function castSkill(i){
  refreshQuick();
 }
 
+/* ---------- R36 : Q·W·E·R 슬롯 시전 ----------
+   대표 지시 2026-08-19: "스킬셋 넣는 것 qwer 만 넣을 수 있게 하고 (-)로 밑에 계속 추가로 붙는 건 없애줘".
+
+   예전 구조의 문제: castSkill(i) 의 i 는 mySkills() 배열 인덱스였다. 그런데 퀵바는 습득한 스킬을
+   전부 그렸고 단축키(P.bind.sk)는 4칸뿐이라, 5개째부터 라벨이 「—」로 뜨고 키로는 쓸 수 없는
+   버튼이 아래로 계속 붙었다.
+   이제 실사용은 P.aslot 네 칸이 전부다. 슬롯 번호(0~3) -> 스킬 id -> mySkills() 인덱스로 넘긴다.
+   castSkill() 자체는 그대로 둔다 — 자동 사냥(18b_autohunt)이 인덱스로 부르고 있다. */
+function castSlot(i){
+ if(!P||!started||deadFlag)return;
+ var id=(P.aslot&&P.aslot[i])||null;
+ if(!id){
+   log("["+(["Q","W","E","R"][i]||"?")+"] 칸이 비어 있습니다 — [V] 스킬 화면에서 등록하십시오.","#888");
+   return;
+ }
+ var list=mySkills(),j;
+ for(j=0;j<list.length;j++)if(list[j].id===id){castSkill(j);return;}
+ log("등록된 스킬을 찾을 수 없습니다 — 계열이 바뀌었을 수 있습니다.","#f88");
+}
+
 /* ---------- 오러 권역 틱 + 몹 출혈 (update 루프가 부른다) ---------- */
 function auraTick(){
  if(!P)return;

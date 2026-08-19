@@ -55,7 +55,7 @@ document.addEventListener("keydown",function(ev){
  if(bindWait&&applyBind(k)){ev.preventDefault();return;}
  var bi;
  if(P&&P.bind){
-   bi=P.bind.sk.indexOf(k); if(k&&bi>=0){castSkill(bi);return;}
+   bi=P.bind.sk.indexOf(k); if(k&&bi>=0){castSlot(bi);return;}   /* R36 — 슬롯 시전 */
    bi=P.bind.pt.indexOf(k); if(k&&bi>=0){usePotKey(POTSLOT[bi]);return;}
  }
  if(k===" "){ev.preventDefault();tryDash();}
