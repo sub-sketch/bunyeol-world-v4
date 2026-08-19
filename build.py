@@ -479,7 +479,36 @@ def mobsheet_block(external=False):
 #   intro  타이틀·프롤로그   town  거점 3곳      field 필드
 #   dun    1부 던전          dun2  2부 산중      dun3  3부 마경(남빛)
 #   boss   보스층 3곳        ending 엔딩
-MUSIC_SLOTS = ("intro", "town", "field", "dun", "dun2", "dun3", "boss", "ending")
+MUSIC_SLOTS = ("intro", "town", "town_dong", "town_ma", "field", "dun", "dun2", "dun3", "boss", "ending")
+
+
+# ============================================================================
+# R34e — 아주 긴 한 줄을 만들지 않는다.
+#   증상: 대표가 채팅 카드/미리보기로 게임을 열면 음악이 하나도 안 나오고 칩튠만 나왔다.
+#   원인: base64 자산이 **문자열 하나 = 줄 하나**로 나가서, MUSICSRC 줄 하나가 18.8 MB 였다.
+#         중간에 텍스트를 다루는 계층(미리보기·프록시·에디터)에는 줄 길이 상한이 흔하고,
+#         그 줄이 잘리거나 통째로 빠지면 MUSICSRC 가 비어 게임은 조용히 칩튠으로 폴백한다.
+#         (05b_music.js 의 `var MUSICSRC = (typeof MUSICSRC!=="undefined")?MUSICSRC:{}` 폴백이
+#          그대로 작동해 버려서, 에러 하나 없이 '노래만 사라진' 것처럼 보였다.)
+#   대책: data: URI 문자열을 60KB 조각으로 끊어 배열 join 으로 바꾼다. 실행 결과는 완전히 같고,
+#         가장 긴 줄이 60KB 로 내려간다. 자산이 커져도 이 상한은 유지된다.
+# ============================================================================
+LINE_CHUNK = 60000
+
+def wrap_long_strings(js, limit=LINE_CHUNK):
+    import re
+    def rep(m):
+        s = m.group(1)
+        if len(s) <= limit:
+            return m.group(0)
+        parts = [s[i:i + limit] for i in range(0, len(s), limit)]
+        return '["' + '",\n"'.join(parts) + '"].join("")'
+    js = re.sub(r'"(data:[^"\\\n]*)"', rep, js)
+    # 조각내도 '자산 여러 개가 한 줄'이면 여전히 길다(MOBSHEET 1.4MB). data: 문자열이 끝나는
+    # 쉼표 뒤에서 줄을 바꾼다 — 이 위치는 반드시 문자열 바깥이라 JS 의미가 바뀌지 않는다.
+    js = re.sub(r'(:"data:[^"\\\n]*",)', r'\1\n', js)
+    js = re.sub(r'(\]\.join\(""\),)', r'\1\n', js)
+    return js
 
 
 def music_block(with_music, external=False):
@@ -600,9 +629,15 @@ def build(out_path=None, check=False, with_music=False, external=False, release=
     chunks.append("/* ---- assets/ui/item (아이템 그림 아이콘) ---- */")
     chunks.append(itemart_block(external))
     mblock, msize = music_block(with_music, external)
+    _music_n = mblock.count('data:audio/mpeg;base64,') if not external else mblock.count("assets/music/")
     chunks.append("/* ---- assets/music (base64) ---- */")
     chunks.append(mblock)
     data_block = "\n".join(chunks)
+    # R34e — 위 helper 참조. 긴 줄 하나가 통째로 사라지는 사고를 원천 차단한다.
+    _before = max((len(x) for x in data_block.split("\n")), default=0)
+    data_block = wrap_long_strings(data_block)
+    _after = max((len(x) for x in data_block.split("\n")), default=0)
+    log("  [줄길이] 최장 줄 %.1f MB -> %.0f KB (60KB 조각으로 분할)" % (_before / 1048576.0, _after / 1024.0))
 
     # ---------- 2) 코드 ----------
     order_path = os.path.join(SRC, "_order.json")
@@ -641,6 +676,9 @@ def build(out_path=None, check=False, with_music=False, external=False, release=
               % (stamp, "배포본 (밸런스 원복)" if release else "개발본 (테스트 배수 켜짐)"))
     # R26 — 플레이 기록 리포트가 어느 빌드에서 나온 것인지 적을 수 있게 상수로 심는다
     stamp_js = 'var BUILD_STAMP = "%s %s";' % (stamp, "배포본" if release else "개발본")
+    # R34e — '몇 곡이 실려야 하는가'를 빌드가 직접 심는다. 런타임에서 실제 개수와 다르면
+    # 파일이 잘렸다는 뜻이므로 타이틀에 경고를 띄운다(조용한 칩튠 폴백을 눈에 보이게).
+    stamp_js += ' var MUSIC_EXPECT = %d;' % _music_n
     html = html.replace("/*__DATA__*/", banner + "\n" + stamp_js + "\n" + data_block)
     html = html.replace("/*__CODE__*/", code_block)
 

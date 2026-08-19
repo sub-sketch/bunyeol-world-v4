@@ -266,7 +266,8 @@ window.addEventListener("resize",fitScale);
 window.addEventListener("orientationchange",function(){setTimeout(fitScale,300);});
 applyAll();
 fitScale();
-musicPlay("intro");   /* 시작 화면 = 접속 음악 */
+musicPlay("intro");
+if(typeof musicStamp==="function")musicStamp();   /* R34d 빌드·음원 표기 */   /* 시작 화면 = 접속 음악 */
 
 /* R30 — 창 크기가 바뀌면 UI 배율(자동)도 다시 잡는다 */
 window.addEventListener("resize",function(){ if(typeof applyUiZoom==="function")applyUiZoom(); });

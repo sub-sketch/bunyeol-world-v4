@@ -12,6 +12,7 @@
  "05_dataglue.js",
  "05_sound.js",
  "05b_music.js",
+ "05c_uiclick.js",
  "06_world.js",
  "07_state.js",
  "08_inventory.js",

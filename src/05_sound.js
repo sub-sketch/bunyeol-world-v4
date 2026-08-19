@@ -33,6 +33,14 @@ function sfx(k){try{
  else if(k==="fire"){noiseHit(.3,.12,900);tone(80,.35,"sawtooth",.08);}
  else if(k==="buff"){tone(523,.1,"triangle",.05);tone(784,.16,"triangle",.05,.09);}
  else if(k==="heal"){tone(784,.1,"sine",.05);tone(1046,.2,"sine",.05,.08);}
+ /* ---- R34g UI 클릭음. 05c_uiclick.js 가 화면 전체의 클릭을 받아 이 키들을 부른다.
+        전투음(hit .1 / hurt .11)보다 뚜렷하게 작게 잡았다 — 클릭은 계속 나는 소리라
+        같은 크기면 금방 피로해진다. 짧게(0.02~0.05초) 끊어 UI 반응처럼 들리게 한다. ---- */
+ else if(k==="ui"){tone(1500,.02,"square",.022);}
+ else if(k==="ui_big"){tone(760,.03,"square",.03);tone(1140,.035,"square",.02,.026);}
+ else if(k==="ui_act"){noiseHit(.022,.028,4200);tone(520,.028,"square",.028);}
+ else if(k==="ui_buy"){tone(1046,.03,"triangle",.026);tone(1568,.045,"triangle",.022,.03);}
+ else if(k==="ui_off"){tone(640,.026,"square",.024);tone(430,.045,"square",.022,.026);}
 }catch(e){}}
 var _=null;
 var SONGS={

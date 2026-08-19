@@ -1953,6 +1953,17 @@
   "P</b>가 돌아왔습니다.": "P</b> has been returned to you.",
   "성소에 은화 ": "You offered ",
   "개를 바쳤습니다.": " silver to the shrine.",
-  "첫 되짚기는 값을 받지 않습니다.": "The first retracing is taken without payment."
+  "첫 되짚기는 값을 받지 않습니다.": "The first retracing is taken without payment.",
+  "빌드 정보 없음": "unknown build",
+  " · 음원 없음(칩튠 전용 빌드)": " · no music tracks (chiptune-only build)",
+  " · 음원 ": " · ",
+  "곡 · ": " tracks · ",
+  "칩튠(설정에서 변경 가능)": "Chiptune (changeable in Settings)",
+  " · ⚠ 음원 ": " · [!] ",
+  "곡 중 ": " of ",
+  "곡만 로드됨 — 파일이 잘렸습니다(원본 html 을 직접 여십시오)": " music tracks loaded - the file was truncated (open the original html directly)",
+  "곡 · 실제 음악": " tracks · real music",
+  "곡 · 지금은 칩튠": " tracks · currently chiptune",
+  "♪ 실제 음악으로 전환": "&#9834; Switch to real music"
  }
 }

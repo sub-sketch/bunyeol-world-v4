@@ -74,7 +74,8 @@
      "line": "다녀온 곳이라면 문을 열어 드리지요."
     }
    },
-   "act": "act1"
+   "act": "act1",
+   "song": "town"
   },
   {
    "id": "dong",
@@ -137,7 +138,8 @@
      "line": "발이 기억하는 길만 열린다."
     }
    },
-   "act": "act2_east"
+   "act": "act2_east",
+   "song": "town_dong"
   },
   {
    "id": "ma",
@@ -200,7 +202,8 @@
      "line": "여기서는 문을 열 것도 없다. 그냥 걸어 들어가면 된다."
     }
    },
-   "act": "act3_abyss"
+   "act": "act3_abyss",
+   "song": "town_ma"
   }
  ]
 }

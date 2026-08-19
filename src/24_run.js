@@ -358,13 +358,15 @@ function runOnFloorClear(){
   setTimeout(typeof showRevelation === "function" ? showRevelation : showFloorReward, 650);
 }
 
-/* 층 클리어 조건 (계획서 v3 §3, R13 완화)
-   예전에는 **존의 몹 전멸**을 요구했다. 그러다 보니 매 층 구석의 마지막 한 마리까지 찾아 죽이는
-   전수 사냥이 강제돼 "층마다 같은 반복 작업"이 되고 난이도가 소모전으로 흘렀다(대표님 지적).
-   이제 목표 처치 비율만 채우면 열린다 — 남은 몹을 더 잡을지 그냥 넘어갈지는 플레이어가 고른다.
-   단, **보스·엘리트(mini)는 예외 없이 처치해야 한다** — 안 그러면 보스를 건너뛰고
-   5층 클리어(META.clear1)가 인정되는 구멍이 생긴다. */
-var FLOOR_CLEAR_RATIO = 0.75;
+/* 층 클리어 조건 (계획서 v3 §3 · R13 완화 → R34c 전멸 복귀)
+   R13 에서 "75% 처치면 열림"으로 완화했었는데(구석 몹까지 찾아 죽이는 소모전을 줄이려는 의도),
+   대표님 재지시(R34c): **층은 100% 전멸해야 열린다**. 남은 몹을 두고 넘어가는 길을 없앤다.
+   ★ 1.0 이면 floorNeed = mobs.length 라 존의 몹을 전부 잡아야 floorCleared 가 참이 된다.
+     floorNeed / floorCleared / floorLeft 셋이 이 상수 하나만 보므로, 값만 바꾸면 UI("앞으로 N마리")도
+     자동으로 전멸 기준을 따라간다.
+   ★ 보스·엘리트(mini)는 원래도 예외 없이 처치 대상이었다(bigAlive 가드) — 100% 에서는 자연히 포함된다.
+   되돌리려면 이 값만 0.75 로 바꾸면 된다. */
+var FLOOR_CLEAR_RATIO = 1.0;
 function floorNeed(z){ return Math.ceil(z.mobs.length * FLOOR_CLEAR_RATIO); }
 function floorCleared(z){
   var i, dead = 0, bigAlive = false;

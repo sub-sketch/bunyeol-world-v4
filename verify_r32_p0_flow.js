@@ -1,10 +1,3 @@
-/* ─────────────────────────────────────────────────────────────
-   R32 회귀 스위트 · 윈도우에서 그대로 실행 가능 (T-P1-7 규약 준수)
-     node verify_r32_p0_flow.js
-   기본 대상: ../dist/game_분열된세계_ONLINE_배포.html
-   대상 바꾸기 : set GAME_HTML=경로
-   브라우저 지정: set CHROME_PATH=크롬경로   (없으면 Playwright 기본 브라우저)
-   ───────────────────────────────────────────────────────────── */
 /* R32 T-P0-2 기능 검증 — 보스 처치 순서를 바꿔가며 실제 killMob() 을 호출한다.
    지난 라운드에 "실기기 확인 필요"로 넘긴 항목(1부 갈림길 / 2부 보스 먼저 / 3부 잡몹 마지막)을
    정적 검사가 아니라 게임 함수 호출로 확인한다.
@@ -97,7 +90,7 @@ const ok = (n, pass, note) => R.push({ n, pass: !!pass, note: note || '' });
     window.__restore();
     return { info, afterBoss, killed, afterAll };
   });
-  ok('2부 8층 구성 실측(밀도 1.6 → 잡몹3+보스1=4, need 3)', b.info.total === 4 && b.info.need === 3, JSON.stringify(b.info));
+  ok('2부 8층 구성 실측(R34c 100% 전멸 → 4마리 전부, need 4)', b.info.total === 4 && b.info.need === 4, JSON.stringify(b.info));
   ok('보스만 잡으면 층이 안 열린다', b.afterBoss.cleared === false && b.afterBoss.alive === 3, JSON.stringify(b.afterBoss));
   ok('★ 보스만 잡았을 때 정산창이 뜨지 않는다 (예전 버그)', b.afterBoss.c.settle === 0 && b.afterBoss.c.runEnd.length === 0, JSON.stringify(b.afterBoss.c));
   ok('★ 보스만 잡았을 때 clear2 가 기록되지 않는다', b.afterBoss.clear2 === undefined || b.afterBoss.clear2 === 0, 'clear2=' + b.afterBoss.clear2);
@@ -118,7 +111,7 @@ const ok = (n, pass, note) => R.push({ n, pass: !!pass, note: note || '' });
     window.__restore();
     return { info, afterBoss, afterAll };
   });
-  ok('3부 11층 구성 실측(밀도 1.6 → 잡몹3+보스1=4, need 3)', c.info.total === 4 && c.info.need === 3, JSON.stringify(c.info));
+  ok('3부 11층 구성 실측(R34c 100% 전멸 → 4마리 전부, need 4)', c.info.total === 4 && c.info.need === 4, JSON.stringify(c.info));
   ok('3부 — 보스만 잡은 단계에서는 정산 없음', c.afterBoss.c.settle === 0 && c.afterBoss.live === true, JSON.stringify(c.afterBoss));
   ok('★ 잡몹이 마지막 일격이어도 런이 끝난다 (예전엔 안 끝났음)', c.afterAll.c.runEnd.length === 1 && c.afterAll.c.runEnd[0] === 'clear', JSON.stringify(c.afterAll.c));
   ok('3부 — 정산창이 실제로 표시된다', c.afterAll.c.settle === 1 && c.afterAll.settleShown === 'block', JSON.stringify(c.afterAll));
@@ -151,8 +144,8 @@ const ok = (n, pass, note) => R.push({ n, pass: !!pass, note: note || '' });
     OPT.density = 1.6; rebuildWorld();
     return out;
   });
-  ok('밀도 옵션별 8층 구성 실측(기본 1.6에서는 전멸 아님)',
-     dens['1'].전멸필요 === true && dens['1.6'].전멸필요 === false, JSON.stringify(dens));
+  ok('★ R34c — 밀도 무관 100% 전멸 필요 (need === total, 남기고 넘어갈 수 없음)',
+     ['1','1.6','2.2','3'].every(function(k){ return dens[k].전멸필요 === true; }), JSON.stringify(dens));
 
   R.push({ n: 'JS 오류(pageerror/console.error)', pass: errs.length === 0, note: errs.slice(0, 6).join(' | ') });
 

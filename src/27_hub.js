@@ -134,7 +134,17 @@ function hubShow(id){
   if(!ov) return false;
   ov.style.display = "block";
   hubRender();
+  hubMusic();                       /* R34b — 이 거점의 곡으로. travel 이 건 town 을 여기서 덮는다 */
   return true;
+}
+/* R34b 거점별 배경음악 — 거점 3곳이 존 0 하나를 공유하므로(hub 는 오버레이),
+   travel 은 언제나 존 0 의 song("town")만 건다. 거점을 바꿔도 음악이 안 바뀌던 이유다.
+   여기서 지금 거점(HUB.id)의 song 으로 다시 건다. 거점 데이터에 song 이 없으면 "town"(서대륙).
+   곡 파일(town_dong/town_ma)이 아직 없으면 MUSICFALL 이 town 으로 떨어뜨린다 — 예전과 동일하게 들린다. */
+function hubMusic(){
+  if(typeof setMusicZone !== "function") return;
+  var h = hubDef(HUB.id);
+  setMusicZone((h && h.song) || "town");
 }
 function hubHide(){
   HUB.open = false;
@@ -148,6 +158,7 @@ function hubSwitch(id){
     return;
   }
   HUB.id = id; hubRender();
+  hubMusic();                       /* R34b — 거점을 바꾸면 그 지역 곡으로 */
   if(typeof sfx === "function") sfx("port");
   qRegEnter(id);
 }

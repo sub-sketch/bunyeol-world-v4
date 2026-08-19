@@ -208,6 +208,60 @@ const ok = (n, pass, note) => R.push({ n, pass: !!pass, note: note || '' });
   ok('되짚기 횟수 기록', rs.respecCount === 1);
   ok('★ 탐험(런) 중에는 되짚기 거부', rs.blockedInRun === true);
 
+  /* ---------- 9. R34b 게이트 목적지 (모든 존의 출구가 유효 존을 가리키는가) ---------- */
+  const gate = await page.evaluate(() => {
+    const bad = [];
+    for (let z = 0; z < ZONES.length; z++) {
+      for (const g of (ZONES[z].gates || [])) {
+        if (!(g.to >= 0 && g.to < ZONES.length)) bad.push('존'+z+'→'+g.to+'(범위밖)');
+      }
+    }
+    /* 각 부 첫 필드(6·9)의 '뒤로 나가는' 문이 마을(존0)로 가는가 — 예전 버그: 존5/존8 */
+    const backGate = (z) => {
+      const gs = ZONES[z].gates || [];
+      let min = null;
+      for (const g of gs) if (min === null || g.x < min.x) min = g;   /* 가장 왼쪽 문 = 복귀문 */
+      return min ? min.to : null;
+    };
+    return { bad, z6back: backGate(6), z9back: backGate(9), z1back: backGate(1) };
+  });
+  ok('모든 존 게이트가 유효 존을 가리킨다', gate.bad.length === 0, gate.bad.join(', ') || '전부 유효');
+  ok('★ 동대륙 첫 필드(존6) 복귀문 → 마을(존0)', gate.z6back === 0, '→존' + gate.z6back);
+  ok('★ 마경 첫 필드(존9) 복귀문 → 마을(존0)', gate.z9back === 0, '→존' + gate.z9back);
+  ok('1부 첫 필드(존1) 복귀문도 마을(회귀 확인)', gate.z1back === 0, '→존' + gate.z1back);
+
+  /* ---------- 10. R34b 거점별 배경음악 ---------- */
+  const hub = await page.evaluate(() => {
+    const res = { hasHubMusic: typeof hubMusic === 'function', hubs: {} };
+    if (typeof HUBS !== 'undefined') for (const h of HUBS) res.hubs[h.id] = h.song || null;
+    /* 각 거점의 song 이 실제로 어떤 트랙으로 해결되는가 */
+    res.resolved = {};
+    for (const id of ['seo','dong','ma']) {
+      const h = (typeof HUBS !== 'undefined') ? HUBS.find(x => x.id === id) : null;
+      res.resolved[id] = h ? musicResolve(MUSICMAP[h.song] || h.song || 'town') : null;
+    }
+    /* 거점 전환이 실제로 음악을 바꾸는가 — hubMusic 을 직접 불러 MUS.want 를 본다 */
+    if (res.hasHubMusic && typeof MUS !== 'undefined') {
+      MUS.unlocked = true;
+      HUB.id = 'seo'; hubMusic(); res.wantSeo = MUS.want;
+      HUB.id = 'dong'; hubMusic(); res.wantDong = MUS.want;
+      HUB.id = 'ma'; hubMusic(); res.wantMa = MUS.want;
+    }
+    return res;
+  });
+  ok('hubMusic 함수 존재 (R34b)', hub.hasHubMusic);
+  ok('거점 3곳에 song 키 부여됨', hub.hubs.seo === 'town' && hub.hubs.dong === 'town_dong' && hub.hubs.ma === 'town_ma', JSON.stringify(hub.hubs));
+  ok('거점 전환이 음악 요청을 바꾼다 (want 값)',
+     hub.wantSeo === 'town' && hub.wantDong === 'town_dong' && hub.wantMa === 'town_ma',
+     JSON.stringify({ seo: hub.wantSeo, dong: hub.wantDong, ma: hub.wantMa }));
+  /* 거점곡이 있으면 자기 자신으로, 없으면 서대륙 town 으로 해결되어야 한다(어느 쪽이든 어긋나면 실패). */
+  const hasDong = base.haveSrc.indexOf('town_dong') >= 0;
+  const hasMa = base.haveSrc.indexOf('town_ma') >= 0;
+  ok('거점곡 해결 상태 정상 (있으면 자기 곡 / 없으면 town)',
+     hub.resolved.dong === (hasDong ? 'town_dong' : 'town') &&
+     hub.resolved.ma === (hasMa ? 'town_ma' : 'town'),
+     JSON.stringify({ resolved: hub.resolved, hasDong, hasMa }));
+
   R.push({ n: 'JS 오류(pageerror/console.error)', pass: errs.length === 0, note: errs.slice(0, 5).join(' | ') });
 
   console.log('\n===== R33 에셋 슬롯 검증 =====');

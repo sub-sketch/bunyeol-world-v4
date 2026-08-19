@@ -16,7 +16,7 @@ var MUSICSRC = (typeof MUSICSRC !== "undefined") ? MUSICSRC : {};
    ★ 새 곡을 넣는 절차: assets/music/{키}.mp3 저장 → 여기 한 줄 추가 → 존의 song 키를 그 이름으로.
    ★ 값이 빈 문자열("")이면 '의도된 무음'이다 — 미등록 키(=field 폴백)와 구분된다(setMusicZone 참조). */
 var MUSICMAP = { intro:"intro", title:"intro", ending:"ending",
-                 town:"town", field:"field",
+                 town:"town", town_dong:"town_dong", town_ma:"town_ma", field:"field",
                  dun:"dun", dun2:"dun2", dun3:"dun3", boss:"boss" };
 /* 옵션 화면의 "지금 나오는 곡" 표시. 곡 제목이 정해지면 채운다(없으면 키 이름이 그대로 뜬다). */
 var MUSICNAME = { intro:"Velocity of Silver", field:"Cold Wind And A Faulty Heart", dun:"Teeth in the Dark" };
@@ -26,7 +26,9 @@ var MUSICNAME = { intro:"Velocity of Silver", field:"Cold Wind And A Faulty Hear
      곡이 들어오는 순간 그 구간만 새 곡으로 바뀌고, 없는 동안은 예전과 똑같이 들린다.
    ★ dun:"dungeon" 은 옛 파일명 호환이다(R33 이전 에셋 폴더를 그대로 써도 소리가 나게).
    ★ town 은 여기 없다 — 대체곡 없이 무음이 맞다(기존 동작 유지). */
-var MUSICFALL = { dun2:"dun", dun3:"dun", boss:"dun", ending:"intro", dun:"dungeon" };
+var MUSICFALL = { dun2:"dun", dun3:"dun", boss:"dun", ending:"intro", dun:"dungeon",
+                  /* R34b — 거점별 곡. 아직 안 만든 거점곡은 서대륙 town 으로 떨어진다(예전=전 거점 town). */
+                  town_dong:"town", town_ma:"town" };
 
 var MUS = { el:{}, cur:null, want:null, fade:null, unlocked:false, ready:false };
 
@@ -84,17 +86,28 @@ function musicPlay(track,force){
 }
 /* 부드러운 전환 — 지역 이동 시 뚝 끊기지 않게 */
 function musicCross(from,to){
+ /* ★ R34h 음악 겹침 수정 (대표 신고: "사냥하다 마을로 돌아오면 노래가 겹쳐진다")
+    예전엔 인자로 받은 from **한 개만** 페이드아웃했다. 그런데 지역 전환은 한 번으로 끝나지 않는다 —
+    필드에서 마을로 들어오면 travel() 이 존 곡을 걸고, 이어서 거점 UI(hubShow)가 거점 곡을 다시 건다.
+    두 번째 호출이 clearInterval 로 첫 페이드를 끊어 버리면, 그때 울리던 요소는 pause 되는 마지막 줄에
+    도달하지 못한 채 볼륨이 남아 **영원히 재생**된다. 그래서 두 곡이 겹쳐 들렸다.
+    이제 대상 곡을 뺀 나머지 전부를 현재 볼륨에서 함께 내리고, 끝나면 모두 정지시킨다.
+    페이드가 중간에 또 끊겨도 다음 호출이 '아직 소리 나는 것 전부'를 다시 잡으므로 새어 나갈 수 없다. */
  if(MUS.fade)clearInterval(MUS.fade);
  var t0=Date.now(), dur=900, target=musicVol();
- var fromEl=from&&from!==to?MUS.el[from]:null, toEl=MUS.el[to];
- var fromV=fromEl?fromEl.volume:0;
+ var toEl=MUS.el[to]||null, outs=[], k;
+ for(k in MUS.el){
+   if(k===to||!MUS.el[k])continue;
+   if(MUS.el[k].paused&&MUS.el[k].volume<=0)continue;      /* 이미 조용한 것은 건드리지 않는다 */
+   outs.push({el:MUS.el[k],v0:MUS.el[k].volume});
+ }
  MUS.fade=setInterval(function(){
-   var k=Math.min(1,(Date.now()-t0)/dur);
-   if(toEl)toEl.volume=target*k;
-   if(fromEl)fromEl.volume=fromV*(1-k);
-   if(k>=1){
+   var r=Math.min(1,(Date.now()-t0)/dur),i;
+   if(toEl)toEl.volume=target*r;
+   for(i=0;i<outs.length;i++)outs[i].el.volume=outs[i].v0*(1-r);
+   if(r>=1){
      clearInterval(MUS.fade);MUS.fade=null;
-     if(fromEl){try{fromEl.pause();}catch(e){}fromEl.volume=0;}
+     for(i=0;i<outs.length;i++){try{outs[i].el.pause();}catch(e){}outs[i].el.volume=0;}
    }
  },40);
 }
@@ -154,6 +167,29 @@ function musicResume(){
  if(MUS.unlocked)musicPlay(MUSBG.want,true);
  else MUS.want=MUSBG.want;                                /* 아직 언락 전이면 조용히 대기 */
 }
+/* R34d — '지금 어느 빌드를 켜는지'를 타이틀에서 바로 보이게 한다.
+   빌드 폴더에 html 이 30개 넘게 쌓여 있어, 음원이 없는 옛 빌드를 열어 놓고
+   "노래가 하나도 안 나온다"고 판단하는 사고가 실제로 있었다(2026-08-18).
+   음원이 박혀 있는지 / 지금 실제음악 모드인지를 한 줄로 적는다. */
+function musicStampText(){
+ var n=0,k; if(typeof MUSICSRC!=="undefined") for(k in MUSICSRC) n++;
+ var v=(typeof BUILD_STAMP!=="undefined")?BUILD_STAMP:"빌드 정보 없음";
+ var exp=(typeof MUSIC_EXPECT==="number")?MUSIC_EXPECT:0;
+ /* 실려야 할 곡 수보다 적게 잡히면 파일이 잘린 것이다 — 조용히 칩튠으로 넘어가지 말고 알린다. */
+ if(exp>0&&n<exp) return v+" · ⚠ 음원 "+exp+"곡 중 "+n+"곡만 로드됨 — 파일이 잘렸습니다(원본 html 을 직접 여십시오)";
+ if(!n) return v+" · 음원 없음(칩튠 전용 빌드)";
+ if(typeof musicMode==="function"&&musicMode()!=="track")
+   return v+" · 음원 "+n+"곡 · 지금은 칩튠"
+        +" <button class='ib' style='margin-left:6px' onclick=\"optSet('music','track')\">"
+        +"♪ 실제 음악으로 전환"+"</button>";
+ return v+" · 음원 "+n+"곡 · 실제 음악";
+}
+function musicStamp(){
+ if(typeof document==="undefined")return;
+ var e=document.getElementById("bstamp"); if(!e)return;
+ e.innerHTML=musicStampText();
+}
+
 (function(){
  if(typeof document==="undefined"||!document.addEventListener)return;
  document.addEventListener("visibilitychange",function(){

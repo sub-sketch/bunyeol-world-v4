@@ -28,7 +28,8 @@ var OPT={
  density:1.6, bigart:true,
  uiz:0,                        /* R30 UI 배율 — 0 = 자동(화면 크기에 맞춤), 그 외 1/1.15/1.3/1.5 */
  qpos:0,                       /* R30 퀵슬롯 자리 — 0 자동 / 1 하단 / 2 우측 레일 */
- mobile:false, mSet:false      /* 모바일 모드 · 첫 실행 자동 감지 완료 여부 */
+ mobile:false, mSet:false,     /* 모바일 모드 · 첫 실행 자동 감지 완료 여부 */
+ mmSet:false                  /* R34f 음악 모드(실제음악/칩튠)를 사용자가 직접 고른 적 있는가 */
 };
 var VW=480, VH=288, curScale=1;
 var OPTKEY="lc2_options";
@@ -43,6 +44,22 @@ function optLoad(){
 }
 function optSave(){try{localStorage.setItem(OPTKEY,JSON.stringify(OPT));}catch(e){}}
 optLoad();
+/* ================= R34f 음악 모드 자동 복구 =================
+   증상: 음원이 10곡 다 박힌 빌드인데도 계속 칩튠만 나온다는 신고가 반복됐다.
+   원인: musicMode() 가 "chip" 을 돌려주는 경로는 두 가지뿐인데(음원 없음 / OPT.music==="chip"),
+         음원은 확인 결과 정상이었다. 즉 브라우저에 저장된 설정값이 칩튠으로 굳어 있는 경우다.
+         이 값은 localStorage 에 남아 새 빌드를 열어도 그대로 따라오므로, 빌드를 아무리 다시 내도
+         증상이 똑같이 재현된다(대표가 겪은 그대로).
+   대책: '사용자가 음악 모드를 직접 고른 적이 있는가'(mmSet)를 따로 기록하고, 고른 적이 없는데
+         값만 칩튠으로 남아 있으면 실제 음악으로 되돌린다. 직접 칩튠을 고르신 경우엔 건드리지 않는다.
+   ========================================================== */
+(function(){
+ if(OPT.mmSet)return;                       /* 직접 고르신 설정은 존중한다 */
+ if(OPT.music==="track")return;
+ var n=0,k; if(typeof MUSICSRC!=="undefined")for(k in MUSICSRC)n++;
+ if(n<=0)return;                            /* 음원이 없는 빌드면 칩튠이 맞다 */
+ OPT.music="track"; optSave();
+})();
 /* 첫 실행이면 터치 기기 여부로 모바일 모드를 자동 결정한다. 이후엔 사용자의 선택을 따른다. */
 if(!OPT.mSet){
  OPT.mSet=true;
@@ -146,7 +163,7 @@ function optSet(k,v){
  else if(k==="minimap"||k==="qtrack"){applyHud();}
  else if(k==="density"){rebuildWorld();}
  else if(k==="bigart"){applyArt();}
- else if(k==="music"){applySound();if(musicMode()==="track"&&MUS.want)musicPlay(MUS.want,true);}
+ else if(k==="music"){OPT.mmSet=true;optSave();applySound();if(musicMode()==="track"&&MUS.want)musicPlay(MUS.want,true);if(typeof musicStamp==="function")musicStamp();}
  else applySound();
  renderOpt();
 }
